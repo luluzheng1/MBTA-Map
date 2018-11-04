@@ -48,4 +48,31 @@ function initMap() {
 		{lat: 42.2078543, lng: -71.0011385}
 	];
 
+	coordinates = [
+		alfcl, davis, portr, harsq, cntsq, knncl, chmnl, pktrm, dwnxg, sstat, brdwy, 
+		andrw, jfk, shmnl, fldcr, smmnl, asmnl, shmnl, nqncy, qnctr, qamnl, brntn
+	];
+
+	closest = [
+		alfcl, davis, portr, harsq, cntsq, knncl, chmnl, pktrm, dwnxg, sstat, brdwy,
+		andrw, jfk, shmnl, fldcr, smmnl, asmnl, shmnl, nqncy, wlsta, qnctr, qamnl, brntn
+	];
+	//forking purposes
+	ashmont = [
+		alfcl, davis, portr, harsq, cntsq, knncl, chmnl, pktrm, dwnxg, sstat, brdwy, 
+		andrw, jfk, shmnl, fldcr, smmnl, asmnl 
+	];	
+
+	braintree = [
+		shmnl, nqncy, wlsta, qnctr, qamnl, brntn
+	];
+
+	stop_name = [
+		"alfcl", "davis", "portr", "harsq", "cntsq", "knncl", "chmnl", "pktrm", "dwnxg", 
+		"sstat", "brdwy", "andrw", "jfk", "shmnl", "fldcr", "smmnl", "asmnl", "shmnl",
+		"nqncy", "qnctr", "qamnl", "brntn" 
+	];
+	
+	icon = 'icon.png';
+
 }

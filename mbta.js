@@ -74,5 +74,40 @@ function initMap() {
 	];
 	
 	icon = 'icon.png';
-
+	//initiate map at South Station
+   	map = new google.maps.Map(document.getElementById('map'), {
+    center: sstat, zoom: 14});
+   	infoWindow = new google.maps.InfoWindow;
+   	
+   	if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+        //mark current location
+      	var my_location = new google.maps.Marker({
+      		position: {lat: position.coords.latitude, lng: position.coords.longitude},
+      		map: map
+      	});
+      	Wollaston();
+      	//finding nearest station
+      	var distance = findDistance(pos, closest[0]);
+      	var stop_num = 0;
+      	for(var i = 0; i < 23; i++) {
+      		var temp = findDistance(pos, closest[i]);
+      		if(temp < distance) {
+      			distance = temp;
+      			stop_num = i;
+      		}
+      	}
+      	//polyline to nearest station
+      	var my_path = [pos, coordinates[stop_num]];
+      	var nearest_path = new google.maps.Polyline({
+			path: my_path,
+			strokeColor: '#00FF00',
+			strokeOpacity: 1.0,
+			strokeWeight: 2
+		});
+		nearest_path.setMap(map);
 }

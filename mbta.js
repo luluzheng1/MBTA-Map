@@ -110,4 +110,50 @@ function initMap() {
 			strokeWeight: 2
 		});
 		nearest_path.setMap(map);
+		//display distance in infowindow
+      	var miles = distance /= 1.60934;	//miles
+      	miles = miles.toFixed(2);
+        infoWindow.setPosition(pos);
+       	//display nearest station name in infowindow
+        key = Object.keys(coordinates[stop_num]);
+        var coords = coordinates[stop_num];
+        var content = 'nearest station: ' + coords[key[2]] + ' ' + miles + ' miles';
+        infoWindow.setContent(content);
+
+      	my_location.addListener('click', function() {
+      		infoWindow.open(map, my_location);
+      	});
+      	//centers map at current location
+      	map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+        } else {
+          // browser doesn't support Geolocation
+        	handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+    	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    		infoWindow.setPosition(pos);
+        	infoWindow.setContent(browserHasGeolocation ?
+                'Error: The Geolocation service failed.' :
+                'Error: Your browser doesn\'t support geolocation.');
+        	infoWindow.open(map);
+    	}
+    //render polyline
+	a = new google.maps.Polyline({
+		path: ashmont,
+		strokeColor: '#FF0000',
+		strokeOpacity: 1.0,
+		strokeWeight: 2
+	});
+	b = new google.maps.Polyline({
+		path: braintree,
+		strokeColor: '#FF0000',
+		strokeOpacity: 1.0,
+		strokeWeight: 2
+	});
+	
+ 	a.setMap(map);
+ 	b.setMap(map);
 }

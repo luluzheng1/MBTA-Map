@@ -156,4 +156,80 @@ function initMap() {
 	
  	a.setMap(map);
  	b.setMap(map);
+
+}
+
+function loadContent() {
+	var time = "";
+	var nRequest = new Array();
+	for (var i= 0; i< 22; i++){ (function(i) {
+		nRequest[i] = new XMLHttpRequest();
+		placeid = "place-" + stop_name[i];
+		var url = "https://api-v3.mbta.com/predictions?filter[route]=Red&filter[stop]=" + placeid
+		+ "&page[limit]=10&page[offset]=0&sort=departure_time&api_key=6545bf2bfe4e40928aca721593594135";
+		nRequest[i].open("GET", url, true);			
+		nRequest[i].onreadystatechange = function (oEvent) {
+			if (nRequest[i].readyState === 4 && nRequest[i].status === 200) {
+				data = nRequest[i].responseText;
+				content = JSON.parse(data);
+				time = "";
+				for (j = 0; j < 4; j++) {
+					if(content.data[j] == undefined ||
+						content.data[j].attributes.arrival_time == null) {
+						word = "Time Unavailable";
+					} else {
+						if(content.data[j].attributes.direction_id === 0) {
+							word = "SouthBound: <br/>";
+						} else {
+							word = "NorthBound: <br/>"; 
+						}
+						word += content.data[j].attributes.arrival_time[11];
+						word += content.data[j].attributes.arrival_time[12];
+						word += content.data[j].attributes.arrival_time[13];
+						word += content.data[j].attributes.arrival_time[14];
+						word += content.data[j].attributes.arrival_time[15];
+					}
+					time += word + "<br/>";
+				}
+				cb(time, i);
+			}
+		};
+		nRequest[i].send(null);
+	})(i);
+	}	
+}
+
+//mark stations w icon
+function cb(time, index) {
+	key = Object.keys(coordinates[index]);
+    var coords = coordinates[index];
+    var content = coords[key[2]];
+	var x = content+ "<br/>" + " Arrival Times: <br/>" + time;
+	var i = index;
+	make_window(x, i);
+}
+
+function findDistance(coords1, coords2) {
+	Number.prototype.toRad = function() {
+   		return this * Math.PI / 180;
+	}
+	key2 = Object.keys(coords2);
+	key1 = Object.keys(coords1);
+	var lat2 = coords2[key2[0]]; 
+	var lon2 = coords2[key2[1]]; 
+	var lat1 = coords1[key1[0]]; 
+	var lon1 = coords1[key1[1]];
+
+	var R = 6371; // km 
+
+	var x1 = lat2-lat1;
+	var dLat = x1.toRad();  
+	var x2 = lon2-lon1;
+	var dLon = x2.toRad();  
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+            Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);  
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c; 
+	return d;
 }

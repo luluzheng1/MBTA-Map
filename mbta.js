@@ -233,3 +233,45 @@ function findDistance(coords1, coords2) {
 	var d = R * c; 
 	return d;
 }
+
+function make_window(time, i) {
+	wind = new google.maps.InfoWindow({ content: time });
+	marker = new google.maps.Marker({
+    	position: winds[i],
+    	map: map,
+    	icon:'icon.png',
+        info: time
+    });
+        
+    google.maps.event.addListener( marker, 'click', function() {
+  	wind.setContent( this.info );
+   	wind.open( map, this );
+	});	
+	
+    stops[i] = new google.maps.Marker({position: coordinates[i], map: map, icon: 'icon.png'});
+    var wind = new google.maps.InfoWindow;
+	wind.setPosition(winds[i]);
+	stops[i].addListener('click', function() {
+    	wind.open(map, stops[i]);
+    });
+	wind.setContent(time);
+}
+
+function Wollaston() {
+	var wollaston = new google.maps.Marker({
+      	position: {lat: 42.2665139, lng: -71.0203369},
+      	icon:'icon.png',
+      	map: map
+    });
+	var pos = {
+        lat: 42.2665139,
+        lng: -71.0203369
+    };
+	wollaston_window = new google.maps.InfoWindow;
+	wollaston_window.setPosition(pos);
+	var content = "Wollaston" + "<br/>" + "Out of Service";
+	wollaston_window.setContent(content);
+    wollaston.addListener('click', function() {
+      	wollaston_window.open(map, wollaston);
+    });
+}

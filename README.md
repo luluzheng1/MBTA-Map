@@ -17,9 +17,7 @@
 	-Information windows display the arrival time (northbound and southbound)
 	 of upcoming trains for the station represented by a marker
 
-2.	I have collaborated with Esther Tzau, another student. We worked on the 
-	assignment separately, but discussed any confusions or questions we had 
-	together. I used the JavaScript implementation of the Haversine Formula on
+2.	I used the JavaScript implementation of the Haversine Formula on
 	Stack Overflow to calculate the distance between two geopoints.
 
-3.	I have spent approximately 15 hours on this assignment.
+3.	I have spent approximately 15 hours on this project.

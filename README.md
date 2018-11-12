@@ -1,23 +1,31 @@
-1.	I have implemented the following aspects:
+#RedLine Updates
+RedLine Updates is a web page that shows all the Massachusetts Bay 
+Transportation Authority Red Line subway train stations on a map along with
+eachstation's real-time schedule of upcoming trains. 
 
-	-Map takes up the entire page
-	-Each station has a marker different from Google Map's default marker
-	-The map is initially centered on South Station
-	-A red polyline connects each station
-	-A CSS file is provided
-	-The location of each station is hard-coded in JavaScript
-	-A separate file is used for JavaScript
-	-Determine the user's geolocation and place a marker at the location that
-	 is different from the icon of the stations (the default red marker was 
-	 used)
-	-Map is centered at user's location when geolocation is determined
-	-Information window displays the closest station upon clicking on the
-	 user's location marker
-	-A polyline that connects the user's marker to the closest station
-	-Information windows display the arrival time (northbound and southbound)
-	 of upcoming trains for the station represented by a marker
+##APIs
+This web application uses the Google Maps API to display a map that spans the 
+entire page and the MBTA API to provide real-time data on subway schedules. 
+The web page is hosted in LocalHost.
 
-2.	I used the JavaScript implementation of the Haversine Formula on
-	Stack Overflow to calculate the distance between two geopoints.
+##Features
+* Red pins on the location of red line stops in map
+* Map centers at South Station initially 
+* A red line shows the path of Red Line and connects all the stations
+* Geolocation
+	- Determines the user's location
+	- Places a pin at that location
+	- The pin is Google's default pin
+	- Once geolocation is determined, map centers at user's location 
+* Information window pops up when the user's pin is clicked
+	- Displays name of and distance to the closest red line station 
+	- Renders a line connecting the user's pin to that station
+* Information window pops up when a station's pin is clicked
+	- Displays the arrival time (northbound and southbound)
+  	  of upcoming trains
 
-3.	I have spent approximately 15 hours on this project.
+##Acknowledgement
+I used the JavaScript implementation of the [Haversine Formula](
+http://www.movable-type.co.uk/scripts/latlong.html) on
+Stack Overflow to calculate the distance between two geopoints.
+
